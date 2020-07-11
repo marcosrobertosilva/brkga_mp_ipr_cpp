@@ -54,7 +54,7 @@
 #include <limits.h>
 #include "chromosome.hpp"
 
-class SampleDecoder {
+class VSBPPDecoder {
 public:
     typedef struct move_info
     {
@@ -63,8 +63,8 @@ public:
         int j;
     } move;
     
-    SampleDecoder(char *instance);	// Constructor
-    ~SampleDecoder();	// Destructor
+    VSBPPDecoder(char *instance);	// Constructor
+    ~VSBPPDecoder();	// Destructor
     
     // Decode a chromosome, returning its fitness as a double-precision floating point:
     double decode(BRKGA::Chromosome& chromosome, bool rewrite) const;

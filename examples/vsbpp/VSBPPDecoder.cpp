@@ -1,27 +1,8 @@
 /*
- * SampleDecoder.cpp
+ * VSBPPDecoder.cpp
  *
- * For more information, see SampleDecoder.h
+ * For more information, see VSBPPDecoder.h
  *
- * Created on : Nov 17, 2011 by rtoso
- * Authors    : Rodrigo Franco Toso <rtoso@cs.rutgers.edu>
- *              Mauricio G.C. Resende <mgcr@research.att.com>
- * Copyright 2010, 2011 Rodrigo Franco Toso and Mauricio G.C. Resende.
- *
- * This file is part of the BRKGA API.
- *
- * The BRKGA API is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * The BRKGA API is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with the BRKGA API. If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <stdio.h>
@@ -47,7 +28,7 @@ using namespace std;
 #define DEBUG 0
 #define CHANGE_CHROM 1
 
-SampleDecoder::SampleDecoder(char *instance) //constructor
+VSBPPDecoder::VSBPPDecoder(char *instance) //constructor
 {
     /* realiza a leitura dos dados de entrada e inicializa os atributos da classe */
     read_prob_sizes(instance);
@@ -58,7 +39,7 @@ SampleDecoder::SampleDecoder(char *instance) //constructor
     read_instance(instance);
 }
 
-SampleDecoder::~SampleDecoder() {
+VSBPPDecoder::~VSBPPDecoder() {
     free(binCap);
     free(binCost);
     free(weight);
@@ -69,7 +50,7 @@ SampleDecoder::~SampleDecoder() {
 	bin_item= NULL;
 } // destructor
 
-double SampleDecoder::decode(BRKGA::Chromosome& chromosome, bool /* not-used */) const {
+double VSBPPDecoder::decode(BRKGA::Chromosome& chromosome, bool /* not-used */) const {
 
     double myFitness = 0.0;
     int k, z;
@@ -167,10 +148,10 @@ double SampleDecoder::decode(BRKGA::Chromosome& chromosome, bool /* not-used */)
 	return myFitness;
 }
 
-int SampleDecoder::getnbObj(){ return items; }
+int VSBPPDecoder::getnbObj(){ return items; }
 
 /*****************************************************************************/
-double SampleDecoder::calc_fitness(vector<int> & individuo) const
+double VSBPPDecoder::calc_fitness(vector<int> & individuo) const
 {
     double f = 0.0;
     int *Q; /* Peso acumulado */
@@ -258,7 +239,7 @@ double SampleDecoder::calc_fitness(vector<int> & individuo) const
 }
 
 /*****************************************************************************/
-void SampleDecoder::read_prob_sizes(char * arquivo)
+void VSBPPDecoder::read_prob_sizes(char * arquivo)
 {
     FILE *fp;
     int tmp = 0;
@@ -275,7 +256,7 @@ void SampleDecoder::read_prob_sizes(char * arquivo)
 }
 
 /*****************************************************************************/
-void SampleDecoder::read_instance(char *arquivo)
+void VSBPPDecoder::read_instance(char *arquivo)
 {
     FILE *fp;
     int i = 0;
@@ -318,7 +299,7 @@ void SampleDecoder::read_instance(char *arquivo)
 
 /******************************************************************************/
 /******************************************************************************/
-void SampleDecoder::best_move(move *mov, int iter, double c_best, double c_curr,
+void VSBPPDecoder::best_move(move *mov, int iter, double c_best, double c_curr,
                int **tabu_time, vector<int> & individuo) const
 {
 	int i, j;
@@ -352,14 +333,14 @@ void SampleDecoder::best_move(move *mov, int iter, double c_best, double c_curr,
 	}
 }
 /******************************************************************************/
-void SampleDecoder::execute_move(move *mov, vector<int> & individuo) const
+void VSBPPDecoder::execute_move(move *mov, vector<int> & individuo) const
 {
     int tmp = individuo[mov->i];
     individuo[mov->i] = individuo[mov->j];
     individuo[mov->j] = tmp;
 }
 /******************************************************************************/
-double SampleDecoder::tabu_search(vector<int> & individuo, double cost) const
+double VSBPPDecoder::tabu_search(vector<int> & individuo, double cost) const
 {
     double ts_cost = 0.0;
     int i, j;
@@ -411,7 +392,7 @@ double SampleDecoder::tabu_search(vector<int> & individuo, double cost) const
     return ts_cost;
 }
 /******************************************************************************/
-int ** SampleDecoder::imatrix(int nrl, int nrh, int ncl, int nch) const
+int ** VSBPPDecoder::imatrix(int nrl, int nrh, int ncl, int nch) const
 {
     int i;
     int **m;
@@ -437,7 +418,7 @@ int ** SampleDecoder::imatrix(int nrl, int nrh, int ncl, int nch) const
     return m;
 }
 /******************************************************************************/
-void SampleDecoder::free_imatrix(int **m, int nrl, int nrh, int ncl) const
+void VSBPPDecoder::free_imatrix(int **m, int nrl, int nrh, int ncl) const
 {
     int i;
     for (i = nrh; i >= nrl; i--)

@@ -74,10 +74,10 @@ int main(int argc, char* argv[]) {
 
         cout << "Building BRKGA data and initializing..." << endl;
 
-        SampleDecoder decoder(instance_file);				// initializes the decoder and reads data
+        VSBPPDecoder decoder(instance_file);				// initializes the decoder and reads data
         const unsigned n = decoder.getnbObj();		// size of chromosomes = Number of alleles per chromosome
 
-        BRKGA::BRKGA_MP_IPR<SampleDecoder> algorithm(
+        BRKGA::BRKGA_MP_IPR<VSBPPDecoder> algorithm(
                 decoder, BRKGA::Sense::MINIMIZE, seed,
                 n, brkga_params);
 
