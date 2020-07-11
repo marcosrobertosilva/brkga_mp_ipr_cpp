@@ -32,14 +32,11 @@ OPT = opt
 # Include dir
 INCLUDES = \
 	-I. \
-	-I../../../brkga_mp_ipr
+	-I../../../brkga_mp_ipr \
+	-I../../../brkga_mp_ipr_cpp/brkga_mp_ipr
 
 # Objects
-OBJS = \
-	./tsp/tsp_instance.o \
-	./heuristics/greedy_tour.o \
-	./decoders/tsp_decoder.o \
-	./decoders/tsp_decoder_pre_allocating.o
+OBJS = ./VSBPPDecoder.o ./global.o
 
 BRKGA_MAIN = ./brkga/main_brkga.o
 BRKGA_EXE = brkga-scheduler
@@ -101,7 +98,8 @@ CXXFLAGS = $(USER_FLAGS)
 .PHONY: all clean
 .SUFFIXES: .cpp .o
 
-all: main_minimal main_complete
+all: main_minimal
+# all: main_minimal main_complete
 
 main_minimal: $(OBJS) $(MAIN_MINIMAL_OBJ)
 	@echo "--> Linking objects... "
