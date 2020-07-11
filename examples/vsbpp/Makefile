@@ -45,14 +45,15 @@ MAIN_COMPLETE_OBJ = main_complete.o
 MAIN_COMPLETE_EXE = main_complete
 
 MAIN_MINIMAL_OBJ = main_minimal.o
-MAIN_MINIMAL_EXE = main_minimal
+MAIN_MINIMAL_EXE = vsbpp
 
 ###############################################################################
 # Compiler, linker, and flags
 ###############################################################################
 
 # C++ Compiler command and flags
-CXX = g++-9
+# CXX = g++-9
+CXX = g++
 # CXX = clang++
 # CXX = /opt/local/bin/clang++-mp-7.0
 
@@ -98,10 +99,10 @@ CXXFLAGS = $(USER_FLAGS)
 .PHONY: all clean
 .SUFFIXES: .cpp .o
 
-all: main_minimal
+all: vsbpp
 # all: main_minimal main_complete
 
-main_minimal: $(OBJS) $(MAIN_MINIMAL_OBJ)
+vsbpp: $(OBJS) $(MAIN_MINIMAL_OBJ)
 	@echo "--> Linking objects... "
 	$(CXX) $(CXXFLAGS) $(OBJS) $(MAIN_MINIMAL_OBJ) -o $(MAIN_MINIMAL_EXE)
 	@echo
