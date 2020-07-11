@@ -30,12 +30,16 @@
 #include <iostream>
 #include <stdexcept>
 #include <string>
-
+#include <cstdio>
+#include <limits>
 using namespace std;
 
 //-------------------------------[ Main ]------------------------------------//
 
 int main(int argc, char* argv[]) {
+    double tempo;
+    clock_t start = clock();
+
     if(argc < 4) {
         cerr << "Usage: "<< argv[0]
              << " <seed> <config-file> <num-generations>"
@@ -90,9 +94,12 @@ int main(int argc, char* argv[]) {
 
         cout << "Evolving " << num_generations << " generations..." << endl;
         algorithm.evolve(num_generations);
+	tempo = (double)(clock() - start)/CLOCKS_PER_SEC;
 
         auto best_cost = algorithm.getBestFitness();
-        cout << "Best cost: " << best_cost;
+        cout << "Best cost: " << best_cost << endl;
+	printf("Time: %.4f\n", tempo);
+
     }
     catch(exception& e) {
         cerr << "\n***********************************************************"
